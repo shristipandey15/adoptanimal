@@ -1,0 +1,5 @@
+### GET ALL PET
+GET http://localhost/4000/api/pets HTTP/1.1
+
+### GET SINGLE PET
+GET http://localhost/4000/api/pets/ HTTP/1.1

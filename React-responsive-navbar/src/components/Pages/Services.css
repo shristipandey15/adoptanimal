@@ -1,0 +1,50 @@
+.services{
+    /* height:15vh; */
+    width:100%;
+    display:flex;
+    justify-content: center;
+  
+}
+.rice{
+    /* height:10vh; */
+    width:50%;
+    margin:auto;
+    font-size:55px;
+    font-weight: bolder;
+    padding:5px 10px;
+    text-align: center;
+}
+.drinks{
+height:50vh;
+display:flex;
+justify-content:space-around;
+border:2px solid red;
+}
+.coke{
+    height:50vh;
+    width:25%;
+    background-image: url('../images/as.jpg');
+    background-position: center;
+    background-size: cover;
+    border-radius:15px;
+
+}
+.sprite{
+    height:50vh;
+    width:25%;
+    background-image: url('../images/o.jpg');
+    background-position: center;
+    background-size: cover;
+    border-radius:15px;
+
+
+}
+.slice{
+    height:50vh;
+    width:25%;
+    background-image: url('../images/kk.jpg');
+    background-position: center;
+    background-size: cover;
+    border-radius:15px;
+
+} 

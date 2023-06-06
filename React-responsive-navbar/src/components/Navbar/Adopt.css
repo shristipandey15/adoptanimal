@@ -1,0 +1,30 @@
+.form{
+    border: 1px solid black;
+    width: 65vh;
+    height:fit-content;
+    font-size:20px;
+    box-sizing: border-box;
+    margin: auto;
+    padding: 10px 20px;
+    border-radius: 5px;
+    text-align: left;
+   
+   
+}  
+p {
+    color: red;
+    text-align: left;
+    margin-left: 19%;
+    margin-top: -3%;
+    font-size: 20px;
+  } 
+.button{
+    background: #EFB335;
+    border: none;
+    padding : 10px 70px;
+    margin-top: 8%;
+    cursor: pointer;
+    font-size: 20px;
+    border-radius: 5px;
+    color:white;
+}  
