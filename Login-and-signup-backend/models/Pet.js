@@ -1,10 +1,26 @@
 const mongoose = require("mongoose");
 
 const petSchema = new mongoose.Schema({
-  title: String,
-  price: String,
-  image: String,
-  details: String
+
+  title:{
+    type:String,
+    required:true
+},
+  price:{
+    type:String,
+    required:true
+},
+  image:{
+    type:String,
+    required:true
+},
+  details:{
+    type:String,
+    required:true
+},
+
+
+
 });
 
 module.exports = mongoose.model("Pet", petSchema);

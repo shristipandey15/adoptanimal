@@ -1,79 +1,120 @@
 const user = require("../models/user");
 
+//Register
+const signUp = async (req, res) => {
+  try {
+    const newUser = new user({
+      name: req.body.name,
+      password: req.body.password,
+      email: req.body.email,
+    });
 
-// const signUp = async(req,res)=>{
+    const savedUser = await newUser.save();
+    res.json(savedUser);
+  } catch (error) {
+    res.status(500).json({ error: 'Internal Server Error', message: error.message });
+  }
+};
 
-// try{
-//             console.log("+++++++++++++++")
+//login
+const login = (req, res) => {
+  console.log("----------");
+  try {
+    const { name, password } = req.body;
 
-    
+    if (!name || !password) {
+      return res
+        .status(400)
+        .json({ msg: "Please fill name and password correctly" });
+    }
+    if (password.length <= 5) {
+      return res.status(400).json({ msg: "password is wrong" });
+    }
 
-//     const newUser = new user ({
-//         name:req.body.name,
-//         email:req.body.email,
-//         password:req.body.password,
-//     }   )   
-//                         const saved = user.save(newUser)
-//                 res.status(200).json({
-//                     message:"user created successfully",
-//                     result:saved
-//                 })
+    res.json({ isTrue: "yes" });
+  } catch (err) {}
+};
 
-// //  const user = await user.find({where:{email:newUser.email}});
-// //     if(user){
-// //         res.status(200).json({
-// //             messege:"email already registred"
-// //         })
-// //     }else{
-// //         if(newUser.password === newUser.password){
-// //             try{
-// //                 const saved = user.save(newUser)
-// //                 res.status(200).json({
-// //                     message:"user created successfully",
-// //                     result:saved
-// //                 })
-// //             }catch(err){
-// //                 res.status(500).json({
-// //                     message:"Internal server error"
-// //                 })
-// //             }
-// //         }
-    
+//get users
+const allUser = async (req, res) => {
+  try {
+    const users = await user.find();
+    return res.status(200).json({
+      success: true,
+      existingusers: users,
+    });
+  } catch (err) {
+    return res.status(400).json({
+      error: err,
+    });
+  }
+};
 
-// //     }
-// }catch(err){
-//         res.status(500).json({
-//             message:"internal server error!!"
-//         })
-//     }
+//get a specific user
+const getUserById = ( async (req, res) => {
+  try {
+    const userId = req.params.id;
 
-    
-// }
+    const id = await user.findById(userId);
 
-
-const signUp = (res,req)=>{
-     try{
-        const newUser =  ({
-            name:req.body.name,
-            email:req.body.email,
-            password:req.body.password,
-        }   )    
-    
-           user.save()
-           res.status(200).json({
-            result:newUser,
-            messege:"register successful"
-           })
-
-     }catch(err){
-        res.status(500).json({
-            err:err
-        })
-     }
+    return res.status(200).json({
+      success: true,
+      user: id,
+    });
+  } catch (err) {
+    return res.status(400).json({ success: false, err });
+  }
 
 
-}
+});
+
+//update users
+const update =( async (req, res) => {
+  try {
+    const updateuser = {
+      name: req.body.name,
+      password: req.body.password,
+      email: req.body.email,
+
+    };``
+
+    const updateduser = await user.findByIdAndUpdate(
+      req.params.id,
+      updateuser,
+      { new: true }
+    );
+
+    if (!updateduser) {
+      return res.status(404).json({ error: "user not found" });
+    }
+
+    return res.status(200).json({
+      success: true,
+      update: updateduser,
+    });
+  } catch (err) {
+    return res.status(400).json({
+      error: err.message,
+    });
+  }
+});
+
+// delete user
+const deleteUser = ( (req, res) => {
+  user.findByIdAndRemove(req.params.id).exec((err, deleteuser) => {
+    if (err)
+      return res.status(400).json({
+        message: "Delete unsuccesfull",
+        err,
+      });
+
+    return res.json({
+      message: "Delete Succesfull",
+      deleteuser,
+    });
+  });
+});
 
 module.exports = {
-    signUp
-}
+  signUp,update,getUserById,allUser,deleteUser,login
+};

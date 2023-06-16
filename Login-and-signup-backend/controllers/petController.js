@@ -1,4 +1,4 @@
-const user = require("../model");
+  const Pet = require("../models/Pet");
 
 //  get all pets
 const pet_all = async (req,res) =>{
@@ -23,14 +23,14 @@ const pet_details = async (req,res) =>{
 
 // add new pet 
 const pet_create = async (req,res) =>{
-    const pet = new Pet({
-        title: req.body.title,
-        price: req.body.price,
-        image: req.body.image,
-        details: req.body.details
-      });
-    
-      try {
+  try {
+        const pet = new Pet({
+            title: req.body.title,
+            price: req.body.price,
+            image: req.body.image,
+            details: req.body.details
+          });
+        
         const savedPet = await pet.save();
         res.send(savedPet);
       } catch (error) {
